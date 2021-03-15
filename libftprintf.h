@@ -38,6 +38,7 @@ typedef struct s_data
     int precision_nb;
     int wildcard_w;
     int wildcard_p;
+    int width_minus;
     tu_arg arg;
     ft f;
 } t_data;

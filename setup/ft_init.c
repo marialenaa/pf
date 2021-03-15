@@ -44,5 +44,6 @@ t_data ft_data_init()
     data.wildcard_w = 0;
     data.wildcard_p = 0;
     data.int_min = 0;
+    data.width_minus = 0;
     return (data);
 }

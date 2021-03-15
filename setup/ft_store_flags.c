@@ -41,6 +41,7 @@ void		*ft_check_n_data(char *str_after_mod, t_data *data)
 	str_after_mod = ft_strchr(str_after_mod, '0', &data->zero_w);
     str_after_mod = ft_strchr(str_after_mod, '-', &data->minus);
     str_after_mod = ft_strchr(str_after_mod, '0', &data->zero_w);
+	str_after_mod = ft_strchr(str_after_mod, '-', &data->width_minus);
 	str_after_mod = ft_check_n_store_digit(str_after_mod, &data->width);
 	str_after_mod = ft_strchr(str_after_mod, '%', &data->mod);
 	str_after_mod = ft_strchr(str_after_mod, '*', &data->wildcard_w);

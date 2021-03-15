@@ -62,7 +62,8 @@ void    ft_treat_width(t_data *data)
         ft_treat_neg(data);
     else if (!data->zero)
     {
-      
+        if(data->precision && data->zero_p)
+            data->zero_p = 0;
         if (data->zero_w)
         {
             data->zero_w = data->width - data->len;
@@ -93,7 +94,7 @@ void    ft_treat_prec(t_data *data)
     data->zero_w = 0;
     if (data->precision_nb > data->len)
     {
-            data->zero_p = data->precision_nb - data->len;
+        data->zero_p = data->precision_nb - data->len;
         if (data->width)
         {
              if (data->precision_nb >= data->width)
@@ -162,13 +163,13 @@ void    ft_treat_flag(t_data *data)
     if (!data->zero)
     {
         if ((!data->precision || !data->precision_nb))
-        ft_treat_width(data);
+            ft_treat_width(data);
         else
             ft_treat_prec(data);
         if (data->zero_w && data->minus && !data->zero)
             data->zero_w = 0;
         if (data->neg && data->width)
-                data->width = data->width -= 1;
+            data->width = data->width -= 1;
     }
 }
 
