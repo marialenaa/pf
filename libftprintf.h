@@ -24,6 +24,7 @@ typedef struct s_data
 {
     int len;
     int mod;
+    int int_min;
     int typ;
     int zero;
     int conv;
@@ -53,20 +54,20 @@ int ft_printf(char *str, ...);
 
 void    ft_find_mod(char *str, va_list args_ptr, t_buf *buf);
 t_buf ft_init_buf(char *list);
-t_data ft_store_data_init();
+t_data ft_data_init();
 
-void    ft_parse_treatment(t_data *store_data, t_buf *buf);
-void    *ft_check_n_store_data(char *str_after_mod, t_data *store_data);
+void    ft_parse_treatment(t_data *data, t_buf *buf);
+void    *ft_check_n_data(char *str_after_mod, t_data *data);
 void	*ft_check_n_store_digit(char *str_after_mod, int *width_or_prec);
 char    *ft_parser(char *str_after_mod, va_list args_ptr, t_buf *buf);
-void    *ft_get_n_store_arg(char *str_after_mod, va_list args_ptr, t_data *store_data);
+void    *ft_get_n_store_arg(char *str_after_mod, va_list args_ptr, t_data *data);
 
 // treat flags
-void    ft_treat_width(t_data *store_data);
-void    ft_width(t_data *store_data);
-void    ft_treat_minus(t_data *store_data);
-void    ft_treat_prec(t_data *store_data);
-void    ft_treat_neg(t_data * store_data);
+void    ft_treat_width(t_data *data);
+void    ft_width(t_data *data);
+void    ft_treat_minus(t_data *data);
+void    ft_treat_prec(t_data *data);
+void    ft_treat_neg(t_data * data);
 
 
 void	ft_div(unsigned int *nb);
@@ -79,22 +80,22 @@ size_t	ft_intlen(unsigned int nb, char typ);
 
 
 //treat types
-void    ft_treat_u_i(t_data *store_data, t_buf *buf);
-void    ft_treat_c(t_data *store_data, t_buf *buf);
-void    ft_treat_s(t_data *store_data, t_buf *buf);
-void    ft_treat_prec_s(t_data *store_data);
-void    ft_treat_x(t_data *store_data, t_buf *buf);
-void    ft_treat_arg_zero(t_data *store_data);
-void    ft_treat_flag(t_data *store_data);
+void    ft_treat_u_i(t_data *data, t_buf *buf);
+void    ft_treat_c(t_data *data, t_buf *buf);
+void    ft_treat_s(t_data *data, t_buf *buf);
+void    ft_treat_prec_s(t_data *data);
+void    ft_treat_x(t_data *data, t_buf *buf);
+void    ft_treat_arg_zero(t_data *data);
+void    ft_treat_flag(t_data *data);
 
 
 //convert arg && print 
-void ft_convert_putnbr_base(long long unsigned int nbr, t_data *store_data, t_buf *buf);
+void ft_convert_putnbr_base(long long unsigned int nbr, t_data *data, t_buf *buf);
 void    ft_print_width(int width, t_buf *buf);
 void    ft_print_zero(int zero_nb, t_buf *buf);
-void    ft_putnbr(long long int n,t_data *store_data, t_buf *buf);
+void    ft_putnbr(long long int n,t_data *data, t_buf *buf);
 void	ft_putchar(char c, t_buf *buf);
-void ft_treat_p(t_data *store_data,  t_buf *buf);
+void ft_treat_p(t_data *data,  t_buf *buf);
 void ft_ptr_len(long long unsigned nbr, int *len);
 
 # endif

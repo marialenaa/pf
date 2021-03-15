@@ -36,18 +36,18 @@ void	*ft_check_n_store_digit(char *str_after_mod, int *width_or_prec)
     return (str_after_mod);
 }
 
-void		*ft_check_n_store_data(char *str_after_mod, t_data *store_data)
+void		*ft_check_n_data(char *str_after_mod, t_data *data)
 {
-	str_after_mod = ft_strchr(str_after_mod, '0', &store_data->zero_w);
-    str_after_mod = ft_strchr(str_after_mod, '-', &store_data->minus);
-    str_after_mod = ft_strchr(str_after_mod, '0', &store_data->zero_w);
-	str_after_mod = ft_check_n_store_digit(str_after_mod, &store_data->width);
-	str_after_mod = ft_strchr(str_after_mod, '%', &store_data->mod);
-	str_after_mod = ft_strchr(str_after_mod, '*', &store_data->wildcard_w);
-	str_after_mod = ft_strchr(str_after_mod, '.', &store_data->precision);
-	str_after_mod = ft_strchr(str_after_mod, '0', &store_data->zero_p);
-	str_after_mod = ft_strchr(str_after_mod, '*', &store_data->wildcard_p);
-	if (store_data->precision)
-		str_after_mod = ft_check_n_store_digit(str_after_mod, &store_data->precision_nb);
+	str_after_mod = ft_strchr(str_after_mod, '0', &data->zero_w);
+    str_after_mod = ft_strchr(str_after_mod, '-', &data->minus);
+    str_after_mod = ft_strchr(str_after_mod, '0', &data->zero_w);
+	str_after_mod = ft_check_n_store_digit(str_after_mod, &data->width);
+	str_after_mod = ft_strchr(str_after_mod, '%', &data->mod);
+	str_after_mod = ft_strchr(str_after_mod, '*', &data->wildcard_w);
+	str_after_mod = ft_strchr(str_after_mod, '.', &data->precision);
+	str_after_mod = ft_strchr(str_after_mod, '0', &data->zero_p);
+	str_after_mod = ft_strchr(str_after_mod, '*', &data->wildcard_p);
+	if (data->precision)
+		str_after_mod = ft_check_n_store_digit(str_after_mod, &data->precision_nb);
 	return (str_after_mod);
 }

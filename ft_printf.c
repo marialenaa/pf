@@ -30,7 +30,7 @@ void ft_find_mod(char *str, va_list args_ptr, t_buf *buf)
         if (str[i] == '\0')
             ft_putstrl(str, i, buf);
         // else
-        //     ft_find_mod(str + i, args_ptr, buf, store_data);
+        //     ft_find_mod(str + i, args_ptr, buf, data);
     }
     //printf("count=%d",buf->count);
 }
@@ -40,7 +40,7 @@ int ft_printf(char *str, ...)
     va_list args_ptr;
    
     //va_copy(args_ptr, args_ptr_cpy);
-    //t_data store_data;
+    //t_data data;
     t_buf buf;
    
     va_start(args_ptr, str);

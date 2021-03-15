@@ -24,7 +24,7 @@ t_buf ft_init_buf(char *list)
     return (buf);
 }
 
-t_data ft_store_data_init()
+t_data ft_data_init()
 {
     t_data data;
 
@@ -43,5 +43,6 @@ t_data ft_store_data_init()
     data.precision_nb = 0;
     data.wildcard_w = 0;
     data.wildcard_p = 0;
+    data.int_min = 0;
     return (data);
 }

@@ -38,86 +38,91 @@ size_t	ft_intlen(unsigned int nb, char typ)
 	return (i);
 }
 
-void ft_treat_wildcard(t_data *store_data, va_list args_ptr)
+void ft_treat_wildcard(t_data *data, va_list args_ptr)
 {
-    
-    if (store_data->wildcard_w)
+    if (data->wildcard_w)
     {
-        store_data->width = va_arg(args_ptr, int);
-        if (store_data->width < 0)
+        data->width = va_arg(args_ptr, int);
+       if (data->width < 0)
         {
-            store_data->width = store_data->width * (-1);
-            if (store_data->typ != 'p')
-                store_data->minus = 1;
+            data->width = data->width * (-1);
+            data->zero_w = 0;
+            if (data->typ != 'p')
+                data->minus = 1;
         }
-            
-        
     }
-    if (store_data->wildcard_p)
+    if (data->wildcard_p)
     {
-        store_data->precision_nb = va_arg(args_ptr, int);
-        if (store_data->precision_nb < 0)
-            store_data->precision_nb = 0;
+        data->precision_nb = va_arg(args_ptr, int);
+        if (data->precision_nb == 0)
+            data->wildcard_p = 0;
+        if (data->precision_nb < 0)
+        {
+             data->precision_nb = 0;
+             if (data->typ == 's') 
+                data->precision = 0;
+        }
     }
-        
-		
 }
 
-void    *ft_get_n_store_arg(char *alpha, va_list args_ptr, t_data *store_data)
+void    *ft_get_n_store_arg(char *alpha, va_list args_ptr, t_data *data)
 {
-    store_data->typ = *alpha;
-    if (store_data->wildcard_w || store_data->wildcard_p)
-        ft_treat_wildcard(store_data, args_ptr);
+    data->typ = *alpha;
+    if (data->wildcard_w || data->wildcard_p)
+        ft_treat_wildcard(data, args_ptr);
     if (*alpha == 's')
     {
-        store_data->arg.arg_s = va_arg(args_ptr, char *);
-        if (store_data->arg.arg_s == NULL)
+        data->arg.arg_s = va_arg(args_ptr, char *);
+        if (data->arg.arg_s == NULL)
         {
-             store_data->arg.arg_s = "(null)";
-             store_data->zero = 1;
+             data->arg.arg_s = "(null)";
+             data->zero = 1;
         }
-        store_data->len = ft_strlen(store_data->arg.arg_s);
+        data->len = ft_strlen(data->arg.arg_s);
     }
     else if (*alpha == 'p')
     {
-        store_data->arg.ptr = va_arg(args_ptr,long long unsigned);
-        if (store_data->arg.ptr == (long long unsigned)NULL)
+        data->arg.ptr = va_arg(args_ptr,long long unsigned);
+        if (data->arg.ptr == (long long unsigned)NULL)
         {
-            store_data->conv = *alpha;
-            store_data->zero_w = 1;
-            store_data->zero = 1;
-            store_data->len = 2; 
+            data->conv = *alpha;
+            data->zero_w = 1;
+            data->zero = 1;
+            data->len = 2; 
         }
-        if (store_data->arg.ptr > 0)
-            ft_ptr_len(store_data->arg.ptr, &store_data->len);
+        if (data->arg.ptr > 0)
+            ft_ptr_len(data->arg.ptr, &data->len);
     }
     else if (*alpha == 'i' || *alpha == 'd')
     {
-        store_data->conv = 'i';
-        store_data->arg.arg_i = va_arg(args_ptr, int);
-        if (store_data->arg.arg_i < 0)
+         data->conv = 'i';
+        data->arg.arg_i = va_arg(args_ptr, int);
+        if (data->arg.arg_i < 0)
         {
-             store_data->neg = 1;
-             store_data->arg.arg_i *= -1; 
+            data->neg = 1;
+            if (data->arg.arg_i == -2147483648)
+                data->int_min = 1;
+            else
+                data->arg.arg_i *= -1; 
         }
-        if (store_data->arg.arg_i == 0)
-            store_data->zero = 1;
-        store_data->len = ft_intlen(store_data->arg.arg_i, store_data->conv);
+        if (data->arg.arg_i == 0)
+            data->zero = 1;
+        data->len = ft_intlen(data->arg.arg_i, data->conv);
     }
     else if (*alpha == 'x' || *alpha == 'X' || *alpha == 'u')
     {
-        store_data->arg.arg_u = va_arg(args_ptr, unsigned int);
+        data->arg.arg_u = va_arg(args_ptr, unsigned int);
         if (!(*alpha == 'u'))
-             store_data->conv = 'x';
-        if (store_data->arg.arg_u == 0)
-            store_data->zero = 1;
+             data->conv = 'x';
+        if (data->arg.arg_u == 0)
+            data->zero = 1;
         else
-            store_data->len = ft_intlen(store_data->arg.arg_u, store_data->conv);
+            data->len = ft_intlen(data->arg.arg_u, data->conv);
     }
     else 
     {
-        store_data->arg.arg_i = va_arg(args_ptr, int);
-        store_data->len = 1;
+        data->arg.arg_i = va_arg(args_ptr, int);
+        data->len = 1;
     }
     return (alpha + 1);
 }
@@ -125,21 +130,21 @@ void    *ft_get_n_store_arg(char *alpha, va_list args_ptr, t_data *store_data)
 char *ft_parser(char *str_after_mod, va_list args_ptr, t_buf *buf)
 {
     int j;
- t_data store_data;
+ t_data data;
 
-  store_data = ft_store_data_init();
+  data = ft_data_init();
     j = 0;
     if (!(ft_isalpha(*str_after_mod)))
-        str_after_mod = ft_check_n_store_data(str_after_mod, &store_data);
+        str_after_mod = ft_check_n_data(str_after_mod, &data);
     if (ft_isalpha(*str_after_mod))
     {
         while (TYPE[j] != *str_after_mod)
             j++;
         if (*str_after_mod == TYPE[j])
-            str_after_mod = ft_get_n_store_arg(str_after_mod, args_ptr, &store_data);
+            str_after_mod = ft_get_n_store_arg(str_after_mod, args_ptr, &data);
     }
-    if (store_data.mod > 0)
-        store_data.len += 1;
-    ft_parse_treatment(&store_data,buf);
+    if (data.mod > 0)
+        data.len += 1;
+    ft_parse_treatment(&data,buf);
     return (str_after_mod);
 }
