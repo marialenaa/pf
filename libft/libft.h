@@ -56,7 +56,7 @@ int					ft_memcmp(const void *s1, const void *s2, size_t n);
 size_t				ft_strlen(const char *s);
 size_t				ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t				ft_strlcat(char *dst, const char *src, size_t dstsize);
-char				*ft_strchr(const char *s, int c);
+char				*ft_strchr(char *s, int c, int *flag);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strnstr(const char *htk, const char *ndl, size_t len);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);

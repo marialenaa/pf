@@ -8,10 +8,10 @@ int main(void)
 
     ptr = &ret;
    //  printf("p\n");
-    ret = printf("%-*.*i%-19.19%" ,15,17,-448314345);
+    ret = printf("  %u    %%    %p    %x    %s    %i  ");
     printf("p\n");
      //printf("\n");
-    ret2 = ft_printf("%-*.*i%-19.19%" ,15,17,-448314345);
+    ret2 = ft_printf("  %u    %%    %p    %x    %s    %i  ");
     printf("p\n");
    printf("ret=%d ret-%d\n", ret, ret2);
     return (0);

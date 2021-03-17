@@ -1,18 +1,5 @@
 #include "../libftprintf.h"
 
-void	ft_strcpy(char *dest, char *src)
-{
-	int i;
-
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-}
-
 t_buf ft_init_buf(char *list)
 {
     t_buf buf;
@@ -21,6 +8,7 @@ t_buf ft_init_buf(char *list)
     buf.len = ft_strlen(list);
     buf.mod = 0;
     buf.count = 0;
+    buf.ptr = NULL;
     return (buf);
 }
 

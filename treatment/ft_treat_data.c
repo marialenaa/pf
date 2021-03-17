@@ -1,60 +1,32 @@
 #include "../libftprintf.h"
 
-void    ft_parse_treatment(t_data *data, t_buf *buf)
+void ft_treat_wildcard(t_data *data, va_list args_ptr)
 {
- //    printf("\nSTRUCTURE INFOS:\n");
- //	 printf("precision_nb >>>>> %d\n", data->precision_nb);
-//     printf("precision >>>>> %d\n", data->precision);
-//     printf("zero >>>>> %d\n", data->zero);
-//     printf("zerop >>>>> %d\n", data->zero_p);
-//    printf("zerow >>>>> %d\n", data->zero_w);
- //    printf("minus >>>>> %d\n", data->minus);
- //     printf("minus >>>>> %d\n", data->minus);
-//    printf("len >>>>> %d\n", data->len);
-//     printf("conv >>>>> %d\n", data->conv);
-//     printf("wildcard >>>>> %d\n", data->wildcard_p);
-//     //printf("arg_s >>>>> %s\n", data->arg.arg_s);
-//     printf("hexa >>>>> %llu\n", data->arg.ptr);
-//    // printf("int >>>>> %d\n", data->arg.arg_i);
- // printf("width >>>>> %d\n", data->width);
-//    printf("mod >>>>> %d\n", data->mod);
-    if (data->typ == 0)
+    if (data->wildcard_w)
     {
-        if (data->zero_w && data->minus && !data->zero)
+        data->width = va_arg(args_ptr, int);
+       if (data->width < 0)
+        {
+            data->width = data->width * (-1);
             data->zero_w = 0;
-        ft_treat_width(data);
-        if (data->mod > 0 && data->minus != 0)
-        {
-            ft_putchar('%', buf);
-            ft_print_zero(data->zero_w, buf);
-            ft_print_width(data->width, buf);
-        }
-        if (data->mod > 0 && data->minus == 0)
-        {
-            ft_print_zero(data->zero_w, buf);
-            ft_print_width(data->width, buf);
-            ft_putchar('%', buf);
+            if (data->typ != 'p')
+                data->minus = 1;
         }
     }
-    else if (data->typ == 'c')
-        ft_treat_c(data, buf);
-    else if (data->typ == 's')
-        ft_treat_s(data,buf);
-    else if (data->conv == 'i' || data->typ == 'u')
-        ft_treat_u_i(data, buf);
-    else if (data->conv == 'x')
-        ft_treat_x(data,buf);
-    else if (data->typ == 'p')
+    if (data->wildcard_p)
     {
-      
-     ft_treat_p(data, buf);
-    }
-    else
-    {
-        ft_print_width(data->width, buf);
-        ft_print_zero(data->width, buf);  
+        data->precision_nb = va_arg(args_ptr, int);
+        if (data->precision_nb == 0)
+            data->wildcard_p = 0;
+        if (data->precision_nb < 0)
+        {
+             data->precision_nb = 0;
+             if (data->typ == 's') 
+                data->precision = 0;
+        }
     }
 }
+
 
 void    ft_treat_width(t_data *data)
 {

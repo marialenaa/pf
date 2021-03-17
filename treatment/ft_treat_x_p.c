@@ -9,7 +9,7 @@ void ft_treat_x(t_data *data, t_buf *buf)
     if (!data->minus)
         ft_print_width(data->width, buf);
     if (data->neg)
-        ft_putchar('-', buf);
+        ft_putchar('-', &buf->count);
     ft_print_zero(data->zero_p, buf);
     ft_print_zero(data->zero_w,buf);
     if (!(data->precision && data->zero))
@@ -25,12 +25,12 @@ void ft_treat_p(t_data *data, t_buf *buf)
         data->arg.arg_s = "(nil)";
         if (data->minus)
         {
-            ft_putchar('0',buf);
-            ft_putchar('x',buf);
+            ft_putchar('0',&buf->count);
+            ft_putchar('x',&buf->count);
             if (data->arg.ptr != 0)
             ft_convert_putnbr_base(data->arg.ptr, data, buf);
             else
-                ft_putchar('0',buf);
+                ft_putchar('0',&buf->count);
             ft_treat_width(data);
             ft_print_width(data->width, buf);
         }
@@ -38,12 +38,12 @@ void ft_treat_p(t_data *data, t_buf *buf)
         {
             ft_treat_width(data);
             ft_print_width(data->width, buf); 
-            ft_putchar('0',buf);
-            ft_putchar('x',buf);
+            ft_putchar('0',&buf->count);
+            ft_putchar('x',&buf->count);
             if (data->arg.ptr != 0)
                 ft_convert_putnbr_base(data->arg.ptr, data, buf);
             else
-                ft_putchar('0',buf);
+                ft_putchar('0',&buf->count);
         }
     }
     else
@@ -52,18 +52,17 @@ void ft_treat_p(t_data *data, t_buf *buf)
         data->typ = 'x';
         if (data->minus)
         {
-            ft_putchar('0',buf);
-            ft_putchar('x',buf);
+            ft_putchar('0',&buf->count);
+            ft_putchar('x',&buf->count);
             ft_convert_putnbr_base(data->arg.ptr, data, buf);
             ft_print_width(data->width, buf); 
         }
         if (!data->minus)
         {
             ft_print_width(data->width, buf);
-            ft_putchar('0',buf);
-            ft_putchar('x',buf);
+            ft_putchar('0',&buf->count);
+            ft_putchar('x',&buf->count);
             ft_convert_putnbr_base(data->arg.ptr, data, buf);
         }
-       
     }
 }

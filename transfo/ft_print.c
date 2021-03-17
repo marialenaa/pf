@@ -1,19 +1,9 @@
 #include "../libftprintf.h"
 
-void	ft_putchar(char c, t_buf *buf)
+void	ft_putchar(char c, int *count)
 {
-    buf->count += write(1, &c, 1);
-    // printf("count=%d",buf->count);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+    write(1, &c,1);
+    *count += 1;
 }
 
 void	ft_putstrl(char *str, int len, t_buf *buf)
@@ -28,7 +18,7 @@ void	ft_putstrl(char *str, int len, t_buf *buf)
             i++;
             buf->mod = 0;
         }
-        ft_putchar(str[i], buf);
+        ft_putchar(str[i], &buf->count);
             i++;
         len--;
     }
@@ -38,7 +28,7 @@ void    ft_print_zero(int zero_nb, t_buf *buf)
 {
     while (zero_nb > 0)
     {
-        ft_putchar('0', buf);
+        ft_putchar('0', &buf->count);
         zero_nb--;
     }
 }
@@ -47,7 +37,7 @@ void    ft_print_width(int width,t_buf *buf)
 {
     while (width > 0)
         {
-            ft_putchar(' ', buf);
+            ft_putchar(' ', &buf->count);
             width--;
         }
 }

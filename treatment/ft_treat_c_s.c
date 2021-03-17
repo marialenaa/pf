@@ -55,11 +55,11 @@ void ft_treat_c(t_data *data, t_buf *buf)
             ft_treat_width(data);
             ft_print_width(data->width, buf);
         }
-        ft_putchar(data->arg.arg_i, buf);
+        ft_putchar(data->arg.arg_i, &buf->count);
     }
     if (data->minus)
     {
-       ft_putchar(data->arg.arg_i, buf);
+       ft_putchar(data->arg.arg_i, &buf->count);
        if (data->width)
        {
             ft_treat_width(data);
