@@ -56,9 +56,9 @@ typedef struct s_buf
 int ft_printf(char *str, ...);
 
 // find GET DATA
-void    *ft_get_type(char *str_after_mod, t_data *data);
+void    *ft_get_type(char *str_after_mod, t_data *data, t_buf *buf);
 void    ft_find_mod(char *str, va_list args_ptr, t_buf *buf);
-void    ft_get_flags(char *str_after_mod, t_data *data, t_buf *buf);
+void    ft_get_flags(char *str_after_mod, t_data *data);
 void	*ft_check_n_store_digit(char *str_after_mod, int *width_or_prec);
 
 //init
@@ -99,6 +99,7 @@ void    ft_putnbr(long long int n,t_data *data, t_buf *buf);
 void	ft_putchar(char c, int *count);
 void    ft_treat_p(t_data *data,  t_buf *buf);
 void    ft_ptr_len(long long unsigned nbr, int *len);
+//void    *ft_double_mod(char *str, t_buf *buf);
 
 //get arg PARSER
 void    ft_notype(va_list args_ptr, t_data *data, t_buf *buf);
@@ -107,5 +108,7 @@ void    ft_get_arg_p(va_list args_ptr, t_data *data, t_buf *buf);
 void    ft_get_arg_i_d(va_list args_ptr, t_data *data, t_buf *buf);
 void    ft_get_arg_x_u(va_list args_ptr, t_data *data, t_buf *buf);
 void    ft_parser(va_list args_ptr, t_data *data, t_buf *buf);
+
+int ft_check_mod(char *str, t_buf *buf);
 
 # endif

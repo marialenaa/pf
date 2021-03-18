@@ -1,5 +1,30 @@
 #include "../libftprintf.h"
 
+void *ft_get_type(char *str_after_mod, t_data *data, t_buf *buf)
+{
+    int j;
+    int i;
+
+    i = 0;
+    while (str_after_mod[i] && str_after_mod[i] != '%')
+    {
+        j = 8;
+        while ((str_after_mod[i] != TYPE[j]) && j)
+            j--;
+        if (str_after_mod[i] == TYPE[j])
+        {
+            data->typ = TYPE[j];
+            buf->ptr = str_after_mod + i;
+            return (str_after_mod + i);
+        }
+        else
+            i++; 
+    }
+    if (str_after_mod[i] == '%')
+         buf->mod = 1;
+    return (str_after_mod + i);
+}
+
 int		ft_isflag(int c)
 {
 	if (c == '-' || c == '0' || c == '.' || c == '*' || c == '%')
@@ -20,29 +45,35 @@ void	*ft_check_n_store_digit(char *str_after_mod, int *width_or_prec)
             str_after_mod++;
 		}
 		*width_or_prec = res;
+        return (str_after_mod);
 	}
     return (str_after_mod);
 }
 
-void		ft_get_flags(char *str, t_data *data, t_buf *buf)
+void		ft_get_flags(char *str, t_data *data)
 {
-    if (!str)
+    if (!*str)
         return ;
-    while ((!ft_isflag(*str) && !ft_isdigit(*str)) && (str != buf->ptr))
-        str++;
-    str = ft_strchr(str, '0', &data->zero_w);
-    str = ft_strchr(str, '-', &data->minus);
-    str = ft_strchr(str, '0', &data->zero_w);
-    str = ft_strchr(str, '-', &data->width_minus);
-    str = ft_check_n_store_digit(str, &data->width);
-    str = ft_strchr(str, '%', &data->mod);
-    str = ft_strchr(str, '*', &data->wildcard_w);
-    str = ft_strchr(str, '.', &data->precision);
-    str = ft_strchr(str, '-', &data->precision);
-    str = ft_strchr(str, '0', &data->zero_p);
-    str = ft_strchr(str, '*', &data->wildcard_p);
-    if (data->precision)
-        str = ft_check_n_store_digit(str, &data->precision_nb);
+    while (*str != data->typ && *str != '%')
+    {
+        if (ft_isflag(*str) || ft_isdigit(*str))
+        {
+            str = ft_strchr(str, '0', &data->zero_w);
+            str = ft_strchr(str, '-', &data->minus);
+            str = ft_strchr(str, '0', &data->zero_w);
+            str = ft_strchr(str, '-', &data->width_minus);
+            str = ft_check_n_store_digit(str, &data->width);
+            str = ft_strchr(str, '*', &data->wildcard_w);
+            str = ft_strchr(str, '.', &data->precision);
+            str = ft_strchr(str, '-', &data->precision);
+            str = ft_strchr(str, '0', &data->zero_p);
+            str = ft_strchr(str, '*', &data->wildcard_p);
+            if (data->precision)
+                str = ft_check_n_store_digit(str, &data->precision_nb);
+        }
+        else
+            str++;
+    }      
 }
 
 void    ft_parser(va_list args_ptr, t_data *data, t_buf *buf)
@@ -53,7 +84,7 @@ void    ft_parser(va_list args_ptr, t_data *data, t_buf *buf)
 //     printf("zero >>>>> %d\n", data->zero);
 //     printf("zerop >>>>> %d\n", data->zero_p);
 //    printf("zerow >>>>> %d\n", data->zero_w);
- //    printf("typ >>>>> %c\n", data->typ);
+ //  printf("typ >>>>> %c\n", data->typ);
 //      printf("minus >>>>> %d\n", data->minus);
 //    printf("len >>>>> %d\n", data->len);
 //     printf("conv >>>>> %d\n", data->conv);
@@ -70,33 +101,10 @@ void    ft_parser(va_list args_ptr, t_data *data, t_buf *buf)
     if (data->typ == 's')
         ft_get_arg_s(args_ptr, data, buf);
     else if (data->typ == 'p')
-        ft_get_arg_p(args_ptr, data, buf);
+            ft_get_arg_p(args_ptr, data, buf);
     else if (data->typ == 'i' || data->typ == 'd')
         ft_get_arg_i_d(args_ptr, data, buf);
     else if (data->typ == 'x' || data->typ == 'X' || data->typ == 'u')
         ft_get_arg_x_u(args_ptr, data, buf);
-    else 
-        ft_notype(args_ptr, data, buf);
 }
 
-void *ft_get_type(char *str_after_mod, t_data *data)
-{
-    int j;
-    int i;
-
-    i = 0;
-    while (str_after_mod[i])
-    {
-        j = 0;
-        while ((str_after_mod[i] != TYPE[j]) && j < 6)
-            j++;
-        if (str_after_mod[i] == TYPE[j])
-        {
-            data->typ = TYPE[j];
-            return (str_after_mod + i);
-        }
-        else
-            i++; 
-    }
-    return (str_after_mod);
-}

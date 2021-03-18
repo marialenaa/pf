@@ -51,7 +51,7 @@ void ft_get_arg_x_u(va_list args_ptr, t_data *data, t_buf *buf)
     if (data->arg.arg_u == 0)
         data->zero = 1;
     else
-        data->len = ft_intlen(data->arg.arg_u, data->conv);
+        data->len = ft_intlen(data->arg.arg_u, data->typ);
     if (!(data->typ == 'u'))
     {
         data->conv = 'x';
@@ -64,28 +64,21 @@ void ft_get_arg_x_u(va_list args_ptr, t_data *data, t_buf *buf)
 void ft_notype(va_list args_ptr, t_data *data, t_buf *buf)
  {
     data->arg.arg_i = va_arg(args_ptr, int);
-        data->len = 1; 
-    if (data->typ == 0)
+    data->len = 1; 
+    if (data->zero_w && data->minus)
+        data->zero_w = 0;
+    ft_treat_width(data);
+    if (data->minus != 0)
     {
-        if (data->zero_w && data->minus && !data->zero)
-            data->zero_w = 0;
-        ft_treat_width(data);
-        if (data->mod > 0 && data->minus != 0)
-        {
-            ft_putchar('%', &buf->count);
-            ft_print_zero(data->zero_w, buf);
-            ft_print_width(data->width, buf);
-        }
-        if (data->mod > 0 && data->minus == 0)
-        {
-            ft_print_zero(data->zero_w, buf);
-            ft_print_width(data->width, buf);
-            ft_putchar('%', &buf->count);
-        }
-    }
-    else
-    {
+        ft_putchar('%', &buf->count);
+        ft_print_zero(data->zero_w, buf);
         ft_print_width(data->width, buf);
-        ft_print_zero(data->width, buf);  
     }
+    if (data->minus == 0)
+    {
+        ft_print_zero(data->zero_w, buf);
+        ft_print_width(data->width, buf);
+        ft_putchar('%', &buf->count);
+    }
+    buf->mod = 0;
 }

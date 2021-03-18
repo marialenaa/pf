@@ -4,25 +4,44 @@ void ft_find_mod(char *str, va_list args_ptr, t_buf *buf)
 {
     t_data data;
 
-    data = ft_data_init();
     while (*str)
     {
-        if ((*str == '%' && *(str + 1)) && (*(str + 1) != '%'))
+        // if (*str == '%' && !buf->mod)
+        // {
+        if (ft_check_mod(str, buf))
         {
+            data = ft_data_init();
             str++;
-            buf->ptr = ft_get_type(str, &data);
-            ft_get_flags(str, &data, buf);
-            ft_parser(args_ptr, &data, buf);
+            //ft_check_mod(str, buf, args_ptr);
+            buf->ptr = ft_get_type(str, &data, buf);
+            //printf("STR%c", *str);
+            ft_get_flags(str, &data);
+            if (data.typ)
+                ft_parser(args_ptr, &data, buf);
+            else
+                ft_notype(args_ptr, &data, buf);
             str = buf->ptr;
         }
         else
-        {
-            if (*str == '%' && (*(str + 1) == '%'))
-                str++;
             ft_putchar(*str, &buf->count);
-        }
         str++;
     }
+}
+
+int ft_check_mod(char *str, t_buf *buf)
+{
+    if (buf->mod || !(*str + 1 || *str != '%'))
+        return (0);
+    if (*str == '%')
+    {
+        if ((*str + 1) == '%')
+        {
+            //write(1, "9\n", 2);
+            buf->mod = 1;
+            return (0);
+        }
+    }
+     return (1);
 }
 
 int ft_printf(char *str, ...)

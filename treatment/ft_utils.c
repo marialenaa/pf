@@ -5,9 +5,10 @@ void ft_ptr_len(long long unsigned nbr, int *len)
     while (nbr > 15)
     {
         nbr = nbr / 16;
-        *len = *len +1;
+        *len = *len + 1;
     }
     *len = *len + 2;
+	
 }
 
 size_t	ft_intlen(unsigned int nb, char typ)
@@ -15,7 +16,7 @@ size_t	ft_intlen(unsigned int nb, char typ)
 	int i;
     
 	i = 0;
-    if (typ == 'x' && nb)
+    if ((typ == 'x' || typ == 'X') && nb)
     {
         while (nb > 15)
         {
@@ -32,6 +33,8 @@ size_t	ft_intlen(unsigned int nb, char typ)
 		i++;
 	}
 	return (i);
+		
+
 }
 
 void	ft_strcpy(char *dest, char *src)

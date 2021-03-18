@@ -2,6 +2,8 @@
 
 void	ft_putchar(char c, int *count)
 {
+    if (!c)
+        return ;
     write(1, &c,1);
     *count += 1;
 }

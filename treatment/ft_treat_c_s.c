@@ -9,11 +9,11 @@ void ft_treat_s(t_data *data, t_buf *buf)
         else
             data->width = 0;
     }
-    else
+    else if (data->precision)
         ft_treat_prec_s(data);
-
     if (!data->minus)
         ft_print_width(data->width, buf);
+   
     ft_putstrl(data->arg.arg_s, data->len, buf);
     if (data->minus)
         ft_print_width(data->width, buf);
@@ -42,7 +42,7 @@ void ft_treat_prec_s(t_data *data)
     else
     {
         if (!data->wildcard_p)
-        data->len = 0;
+            data->len = 0;
     }
 }
 

@@ -23,28 +23,30 @@ void ft_treat_p(t_data *data, t_buf *buf)
     if (data->zero)
     {
         data->arg.arg_s = "(nil)";
-        if (data->minus)
-        {
-            ft_putchar('0',&buf->count);
-            ft_putchar('x',&buf->count);
-            if (data->arg.ptr != 0)
-            ft_convert_putnbr_base(data->arg.ptr, data, buf);
-            else
-                ft_putchar('0',&buf->count);
-            ft_treat_width(data);
-            ft_print_width(data->width, buf);
-        }
-        if (!data->minus)
-        {
-            ft_treat_width(data);
-            ft_print_width(data->width, buf); 
-            ft_putchar('0',&buf->count);
-            ft_putchar('x',&buf->count);
-            if (data->arg.ptr != 0)
-                ft_convert_putnbr_base(data->arg.ptr, data, buf);
-            else
-                ft_putchar('0',&buf->count);
-        }
+        ft_putstrl(data->arg.arg_s, 5, buf);
+        return ;
+        // if (data->minus)
+        // {
+        //     ft_putchar('0',&buf->count);
+        //     ft_putchar('x',&buf->count);
+        //     if (data->arg.ptr != 0)
+        //     ft_convert_putnbr_base(data->arg.ptr, data, buf);
+        //     else
+        //         ft_putchar('0',&buf->count);
+        //     ft_treat_width(data);
+        //     ft_print_width(data->width, buf);
+        // }
+        // if (!data->minus)
+        // {
+        //     ft_treat_width(data);
+        //     ft_print_width(data->width, buf); 
+        //     ft_putchar('0',&buf->count);
+        //     ft_putchar('x',&buf->count);
+        //     if (data->arg.ptr != 0)
+        //         ft_convert_putnbr_base(data->arg.ptr, data, buf);
+        //     else
+        //         ft_putchar('0',&buf->count);
+        // }
     }
     else
     {

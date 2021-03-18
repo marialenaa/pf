@@ -53,7 +53,6 @@ void    ft_treat_width(t_data *data)
     }
     else
     {
-        
         if (data->typ == 'p' && !data->zero)
                 data->width = data->width - data->len;
         else
