@@ -5,9 +5,9 @@ void ft_treat_u_i(t_data *data, t_buf *buf)
     long long int arg;
 
     if (data->conv == 'i')
-        arg = data->arg.arg_i;
+        arg = data->arg_i;
     else
-        arg = data->arg.arg_u;
+        arg = data->arg_u;
     if (!data->width && !data->precision)
         data->zero_w = 0;
     if (data->width || data->precision)

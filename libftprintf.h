@@ -12,13 +12,10 @@
 
 typedef void (*ft)(void *, ...);
 
-typedef union u_arg 
-{
-    char *arg_s;
-    unsigned long long ptr;
-    int arg_i;
-    unsigned int arg_u;
-} tu_arg;
+// typedef union u_arg 
+// {
+   
+// } tu_arg;
 
 typedef struct s_data
 {
@@ -28,7 +25,6 @@ typedef struct s_data
     int typ;
     int zero;
     int conv;
-    int size_max;
     int minus;
     int neg;
     int zero_w;
@@ -39,8 +35,10 @@ typedef struct s_data
     int wildcard_w;
     int wildcard_p;
     int width_minus;
-    tu_arg arg;
-    ft f;
+    char *arg_s;
+    unsigned long long ptr;
+    int arg_i;
+    unsigned int arg_u;
 } t_data;
 
 typedef struct s_buf
@@ -58,7 +56,7 @@ int ft_printf(char *str, ...);
 // find GET DATA
 void    *ft_get_type(char *str_after_mod, t_data *data, t_buf *buf);
 void    ft_find_mod(char *str, va_list args_ptr, t_buf *buf);
-void    ft_get_flags(char *str_after_mod, t_data *data);
+void    ft_get_flags(char *str_after_mod, t_data *data, t_buf *buf);
 void	*ft_check_n_store_digit(char *str_after_mod, int *width_or_prec);
 
 //init
@@ -84,7 +82,7 @@ int		ft_isdigit(int c);
 
 //treat types
 void    ft_treat_u_i(t_data *data, t_buf *buf);
-void    ft_treat_c(t_data *data, t_buf *buf);
+void    ft_treat_c(va_list args_ptr, t_data *data, t_buf *buf);
 void    ft_treat_s(t_data *data, t_buf *buf);
 void    ft_treat_prec_s(t_data *data);
 void    ft_treat_x(t_data *data, t_buf *buf);
@@ -96,7 +94,7 @@ void    ft_convert_putnbr_base(long long unsigned int nbr, t_data *data, t_buf *
 void    ft_print_width(int width, t_buf *buf);
 void    ft_print_zero(int zero_nb, t_buf *buf);
 void    ft_putnbr(long long int n,t_data *data, t_buf *buf);
-void	ft_putchar(char c, int *count);
+void	ft_putchar(int c, int *count);
 void    ft_treat_p(t_data *data,  t_buf *buf);
 void    ft_ptr_len(long long unsigned nbr, int *len);
 //void    *ft_double_mod(char *str, t_buf *buf);
@@ -109,6 +107,6 @@ void    ft_get_arg_i_d(va_list args_ptr, t_data *data, t_buf *buf);
 void    ft_get_arg_x_u(va_list args_ptr, t_data *data, t_buf *buf);
 void    ft_parser(va_list args_ptr, t_data *data, t_buf *buf);
 
-int ft_check_mod(char *str, t_buf *buf);
+void *ft_check_mod(char *str, t_buf *buf);
 
 # endif

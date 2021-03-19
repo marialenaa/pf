@@ -20,7 +20,6 @@ t_data ft_data_init()
     data.mod = 0;
     data.conv = 0;
     data.zero = 0;
-    data.size_max = 0;
     data.typ = 0;
     data.minus = 0;
     data.neg = 0;
@@ -33,5 +32,9 @@ t_data ft_data_init()
     data.wildcard_p = 0;
     data.int_min = 0;
     data.width_minus = 0;
+    data.arg_s = "(null)";
+    data.ptr = 0;
+    data.arg_i = 0;
+    data.arg_u = 0;
     return (data);
 }

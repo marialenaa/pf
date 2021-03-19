@@ -1,9 +1,10 @@
 #include "../libftprintf.h"
 
-void	ft_putchar(char c, int *count)
+void	ft_putchar(int c, int *count)
 {
-    if (!c)
-        return ;
+   
+        //printf("c%c", c); 
+        //printf("d%d", c);
     write(1, &c,1);
     *count += 1;
 }

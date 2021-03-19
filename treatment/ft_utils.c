@@ -8,7 +8,6 @@ void ft_ptr_len(long long unsigned nbr, int *len)
         *len = *len + 1;
     }
     *len = *len + 2;
-	
 }
 
 size_t	ft_intlen(unsigned int nb, char typ)
@@ -33,8 +32,6 @@ size_t	ft_intlen(unsigned int nb, char typ)
 		i++;
 	}
 	return (i);
-		
-
 }
 
 void	ft_strcpy(char *dest, char *src)
@@ -49,13 +46,3 @@ void	ft_strcpy(char *dest, char *src)
 	}
 	dest[i] = '\0';
 }
-
-// char	*ft_strchr(char *s, int c, int *flag)
-// {
-// 	if (*s == (char)c)
-// 	{
-// 		*flag = 1;
-// 		return (s + 1);
-// 	}
-// 	return (s);
-// }

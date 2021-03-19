@@ -14,7 +14,7 @@ void ft_treat_s(t_data *data, t_buf *buf)
     if (!data->minus)
         ft_print_width(data->width, buf);
    
-    ft_putstrl(data->arg.arg_s, data->len, buf);
+    ft_putstrl(data->arg_s, data->len, buf);
     if (data->minus)
         ft_print_width(data->width, buf);
 }
@@ -46,8 +46,10 @@ void ft_treat_prec_s(t_data *data)
     }
 }
 
-void ft_treat_c(t_data *data, t_buf *buf)
+void ft_treat_c(va_list args_ptr, t_data *data, t_buf *buf)
 {
+    data->len = 1;
+    data->arg_i = va_arg(args_ptr, int);
     if (!data->minus)
     {
         if (data->width)
@@ -55,11 +57,12 @@ void ft_treat_c(t_data *data, t_buf *buf)
             ft_treat_width(data);
             ft_print_width(data->width, buf);
         }
-        ft_putchar(data->arg.arg_i, &buf->count);
+        //printf("arg_i >> %c\n", data->arg_i);
+        ft_putchar(data->arg_i, &buf->count);
     }
-    if (data->minus)
+    else if (data->minus)
     {
-       ft_putchar(data->arg.arg_i, &buf->count);
+       ft_putchar(data->arg_i, &buf->count);
        if (data->width)
        {
             ft_treat_width(data);

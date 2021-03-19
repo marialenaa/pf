@@ -6,42 +6,43 @@ void ft_find_mod(char *str, va_list args_ptr, t_buf *buf)
 
     while (*str)
     {
-        // if (*str == '%' && !buf->mod)
-        // {
-        if (ft_check_mod(str, buf))
+        str = ft_check_mod(str, buf);
+        if (*str == '%' && !buf->mod)
         {
+
             data = ft_data_init();
             str++;
-            //ft_check_mod(str, buf, args_ptr);
             buf->ptr = ft_get_type(str, &data, buf);
-            //printf("STR%c", *str);
-            ft_get_flags(str, &data);
+            ft_get_flags(str, &data, buf);
             if (data.typ)
-                ft_parser(args_ptr, &data, buf);
+                 ft_parser(args_ptr, &data, buf);
             else
-                ft_notype(args_ptr, &data, buf);
+                 ft_notype(args_ptr, &data, buf);
             str = buf->ptr;
         }
         else
+        {
+            buf->mod = 0;
             ft_putchar(*str, &buf->count);
+        }
         str++;
     }
 }
 
-int ft_check_mod(char *str, t_buf *buf)
+void *ft_check_mod(char *str, t_buf *buf)
 {
-    if (buf->mod || !(*str + 1 || *str != '%'))
-        return (0);
+    if (buf->mod || !(*(str + 1) || *str != '%'))
+         return (str);
     if (*str == '%')
     {
-        if ((*str + 1) == '%')
+        //write(1, "**\n", 3);
+        if (*(str + 1) == '%')
         {
-            //write(1, "9\n", 2);
             buf->mod = 1;
-            return (0);
-        }
+            str++;
+        } 
     }
-     return (1);
+    return (str);
 }
 
 int ft_printf(char *str, ...)
