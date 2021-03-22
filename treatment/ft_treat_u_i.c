@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_treat_u_i.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgallizz <mgallizz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/19 14:49:35 by mgallizz          #+#    #+#             */
+/*   Updated: 2021/03/22 09:50:51 by mgallizz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libftprintf.h"
 
 void ft_treat_u_i(t_data *data, t_buf *buf)
@@ -17,7 +29,7 @@ void ft_treat_u_i(t_data *data, t_buf *buf)
     if (!data->minus)
         ft_print_width(data->width, buf);
     if (data->neg)
-        ft_putchar('-', &buf->count);        
+        ft_putchar('-', &buf->count);      
     ft_print_zero(data->zero_p, buf);
     ft_print_zero(data->zero_w, buf);
     if (!(data->precision && data->zero) && !data->int_min)
@@ -27,6 +39,3 @@ void ft_treat_u_i(t_data *data, t_buf *buf)
     if (data->minus)
         ft_print_width(data->width, buf);
 }
-
-
-

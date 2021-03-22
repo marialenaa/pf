@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_treat_x_p.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgallizz <mgallizz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/19 14:49:44 by mgallizz          #+#    #+#             */
+/*   Updated: 2021/03/19 15:05:35 by mgallizz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libftprintf.h"
 
 void ft_treat_x(t_data *data, t_buf *buf)
@@ -18,38 +30,11 @@ void ft_treat_x(t_data *data, t_buf *buf)
         ft_print_width(data->width, buf);
 }
 
+
 void ft_treat_p(t_data *data, t_buf *buf)
 {
     if (data->zero)
-    {
-        // data->arg_s = "(nil)";
-        // ft_putstrl(data->arg_s, 5, buf);
-        // return ;
-        if (data->minus)
-        {
-            ft_putchar('0',&buf->count);
-            ft_putchar('x',&buf->count);
-          //  ft_putchar('0',&buf->count);
-            if (data->ptr != 0)
-            ft_convert_putnbr_base(data->ptr, data, buf);
-            else
-                ft_putchar('0',&buf->count);
-            ft_treat_width(data);
-            ft_print_width(data->width, buf);
-        }
-        if (!data->minus)
-        {
-            ft_treat_width(data);
-            ft_print_width(data->width, buf); 
-            ft_putchar('0',&buf->count);
-            ft_putchar('x',&buf->count);
-          //  ft_putchar('0',&buf->count);
-            if (data->ptr != 0)
-                ft_convert_putnbr_base(data->ptr, data, buf);
-            else
-                ft_putchar('0',&buf->count);
-        }
-    }
+        ft_treat_zero_p(data, buf);
     else
     {
         ft_treat_width(data);
@@ -68,5 +53,31 @@ void ft_treat_p(t_data *data, t_buf *buf)
             ft_putchar('x',&buf->count);
             ft_convert_putnbr_base(data->ptr, data, buf);
         }
+    }
+}
+
+void ft_treat_zero_p(t_data *data, t_buf *buf)
+{
+    if (data->minus)
+    {
+        ft_putchar('0',&buf->count);
+        ft_putchar('x',&buf->count);
+        if (data->ptr != 0)
+        ft_convert_putnbr_base(data->ptr, data, buf);
+        else
+            ft_putchar('0',&buf->count);
+        ft_treat_width(data);
+        ft_print_width(data->width, buf);
+    }
+    if (!data->minus)
+    {
+        ft_treat_width(data);
+        ft_print_width(data->width, buf); 
+        ft_putchar('0',&buf->count);
+        ft_putchar('x',&buf->count);
+        if (data->ptr != 0)
+            ft_convert_putnbr_base(data->ptr, data, buf);
+        else
+            ft_putchar('0',&buf->count);
     }
 }

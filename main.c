@@ -8,10 +8,10 @@ int main(void)
 
     ptr = &ret;
    //  printf("p\n");
-    ret = printf("%c", 0);
+    ret = printf("%.*d", -99, 0);
     printf("p\n");
      //printf("\n");
-    ret2 = ft_printf("%c", 0);
+    ret2 = ft_printf("%.*d", -15, 0);
     printf("p\n");
     printf("ret=%d ret-%d\n", ret, ret2);
     return (0);

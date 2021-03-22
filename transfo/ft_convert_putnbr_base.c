@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_convert_putnbr_base.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgallizz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/19 14:48:21 by mgallizz          #+#    #+#             */
+/*   Updated: 2021/03/19 14:48:26 by mgallizz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libftprintf.h"
 
 void ft_putnbr(long long int n,t_data *data,  t_buf *buf)
@@ -14,7 +26,7 @@ void ft_putnbr(long long int n,t_data *data,  t_buf *buf)
 void ft_convert_putnbr_base(long long unsigned nbr, t_data *data,  t_buf *buf)
 {
     long long unsigned num_base;
-    
+        
     num_base = 16;
     if (nbr >= num_base && !data->zero)
     {

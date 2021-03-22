@@ -1,30 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgallizz <mgallizz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/19 14:49:59 by mgallizz          #+#    #+#             */
+/*   Updated: 2021/03/19 15:06:37 by mgallizz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libftprintf.h"
 
 void ft_ptr_len(long long unsigned nbr, int *len)
 {
-    while (nbr > 15)
-    {
-        nbr = nbr / 16;
-        *len = *len + 1;
-    }
-    *len = *len + 2;
+	while (nbr > 15)
+	{
+		nbr = nbr / 16;
+		*len = *len + 1;
+	}
+	*len = *len + 2;
 }
 
 size_t	ft_intlen(unsigned int nb, char typ)
 {
 	int i;
-    
+		
 	i = 0;
-    if ((typ == 'x' || typ == 'X') && nb)
-    {
-        while (nb > 15)
-        {
-            nb = nb / 16;
-            i++ ;
-        }
-        return (i + 1);
-    }
-    if (nb)
+	if ((typ == 'x' || typ == 'X') && nb)
+	{
+		while (nb > 15)
+		{
+			nb = nb / 16;
+			i++ ;
+		}
+		return (i + 1);
+	}
+	if (nb)
 		i++;
 	while (nb > 9)
 	{
