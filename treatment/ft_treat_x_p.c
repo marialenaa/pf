@@ -6,7 +6,7 @@
 /*   By: mgallizz <mgallizz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:49:44 by mgallizz          #+#    #+#             */
-/*   Updated: 2021/03/19 15:05:35 by mgallizz         ###   ########.fr       */
+/*   Updated: 2021/03/22 16:41:38 by mgallizz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,22 @@ void ft_treat_zero_p(t_data *data, t_buf *buf)
         ft_putchar('0',&buf->count);
         ft_putchar('x',&buf->count);
         if (data->ptr != 0)
-        ft_convert_putnbr_base(data->ptr, data, buf);
+            ft_convert_putnbr_base(data->ptr, data, buf);
+        else if (data->precision && !data->precision_nb)
+            data->len = 0;
         else
             ft_putchar('0',&buf->count);
+    }
         ft_treat_width(data);
         ft_print_width(data->width, buf);
-    }
     if (!data->minus)
-    {
-        ft_treat_width(data);
-        ft_print_width(data->width, buf); 
+    { 
         ft_putchar('0',&buf->count);
         ft_putchar('x',&buf->count);
         if (data->ptr != 0)
             ft_convert_putnbr_base(data->ptr, data, buf);
+        else if (data->precision && !data->precision_nb)
+            data->len = 0;
         else
             ft_putchar('0',&buf->count);
     }

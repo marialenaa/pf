@@ -6,7 +6,7 @@
 /*   By: mgallizz <mgallizz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:47:34 by mgallizz          #+#    #+#             */
-/*   Updated: 2021/03/22 10:06:42 by mgallizz         ###   ########.fr       */
+/*   Updated: 2021/03/22 15:02:12 by mgallizz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,18 @@ void	ft_get_flags(char *str, t_data *data, t_buf *buf)
 			str = ft_strchr(str, '0', &data->zero_w);
 			str = ft_strchr(str, '-', &data->minus);
 			str = ft_strchr(str, '0', &data->zero_w);
-			str = ft_strchr(str, '-', &data->width_minus);
+			str = ft_strchr(str, '-', &data->minus);
 			str = ft_check_n_store_digit(str, &data->width);
 			str = ft_strchr(str, '*', &data->wildcard_w);
 			str = ft_strchr(str, '.', &data->precision);
-			str = ft_strchr(str, '-', &data->precision);
+			str = ft_strchr(str, '-', &data->minus);
 			str = ft_strchr(str, '0', &data->zero_p);
 			str = ft_strchr(str, '*', &data->wildcard_p);
 			if (data->precision)
 				str = ft_check_n_store_digit(str, &data->precision_nb);
+				//printf("w%d",data->precision_nb);
+			if (data->minus && data->zero_w)
+        		data->zero_w = 0;
 		}
 		else
 		{

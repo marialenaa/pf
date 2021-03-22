@@ -50,17 +50,16 @@ void ft_wildcard_w(t_data *data, va_list args_ptr)
 void ft_wildcard_p(t_data *data, va_list args_ptr)
 {
 	 data->precision_nb = va_arg(args_ptr, int);
-		if (data->precision_nb == 0)
-			data->wildcard_p = 0;
-		if (data->precision_nb < 0)
-		{
-			//printf("Z%d", data->zero_p);
-			data->precision_nb = 0;
-			if (data->typ == 'i' || data->typ == 'd')
-				data->precision_nb = 1;
-			if (data->typ == 's') 
-				data->precision = 0;
-		}
+	if (data->precision_nb == 0)
+		data->wildcard_p = 0;
+	if (data->precision_nb < 0)
+	{
+		//printf("Z%d", data->zero_p);
+		if (data->typ != 'i' && data->typ != 'd' && data->typ != 'u')
+			data->precision_nb = 1;
+		if (data->typ == 's') 
+			data->precision = 0;
+	}
 }
 
 void ft_treat_neg(t_data * data)
@@ -110,6 +109,7 @@ void    ft_treat_width(t_data *data)
 
 void    ft_treat_prec(t_data *data)
 {
+	//printf("p\n");
 	data->zero_w = 0;
 	if (data->precision_nb > data->len)
 	{
@@ -129,46 +129,3 @@ void    ft_treat_prec(t_data *data)
 	}
 }
 
-void    ft_treat_arg_zero(t_data *data)
-{
-	ft_width_notprec_nb(data);
-	if (data->width && data->precision_nb)
-	{
-		data->zero_w = 0;
-		data->zero_p = data->precision_nb;
-		data->width = data->width - data->precision_nb;
-	}
-	if (!data->width)
-	{
-		if (data->wildcard_p)
-			data->zero_p = 1;
-		if (data->precision_nb)
-			data->zero_p = data->precision_nb;
-		if (data->typ == 'i' || data->typ == 'd')
-		{
-			if (data->zero_p && !data->precision_nb)
-			data->zero_p = 0;
-		}
-	} 
-}
-
-void ft_width_notprec_nb(t_data *data)
-{
-	if (data->width && !data->precision_nb)
-	{
-			if (data->zero_w)
-			{
-					data->zero_w = data->width - 1;
-					data->width = 0;
-			}
-			if (!data->zero_w && !data->precision)
-					data->width = data->width - 1;
-			if (data->precision)
-			{
-					data->zero_w = 0;
-					data->zero_p = 0;
-					if (data->wildcard_p)
-							data->zero_p = 1;
-			}
-	}
-}
