@@ -6,7 +6,7 @@
 /*   By: mgallizz <mgallizz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:51:08 by mgallizz          #+#    #+#             */
-/*   Updated: 2021/03/22 10:09:37 by mgallizz         ###   ########.fr       */
+/*   Updated: 2021/03/23 13:27:59 by mgallizz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void        ft_treat_x(t_data *data, t_buf *buf);
 void        ft_convert_putnbr_base(long long unsigned int nbr, t_data *data, t_buf *buf);
 void        ft_print_width(int width, t_buf *buf);
 void        ft_print_zero(int zero_nb, t_buf *buf);
+void            ft_print_zero_m(t_data *data, t_buf *buf);
+void    ft_print_zero_nm(t_data *data, t_buf *buf);
 void        ft_putnbr(long long int n,t_data *data, t_buf *buf);
 void	ft_putchar(int c, int *count);
 void        ft_treat_p(t_data *data,  t_buf *buf);
@@ -103,7 +105,7 @@ void        ft_ptr_len(long long unsigned nbr, int *len);
 //void      *ft_double_mod(char *str, t_buf *buf);
 
 //get arg PARSER
-void        ft_notype(va_list args_ptr, t_data *data, t_buf *buf);
+void        ft_notype(t_data *data, t_buf *buf, va_list args_ptr);
 void        ft_get_arg_s(va_list args_ptr, t_data *data, t_buf *buf);
 void        ft_get_arg_p(va_list args_ptr, t_data *data, t_buf *buf);
 void        ft_get_arg_i_d(va_list args_ptr, t_data *data, t_buf *buf);

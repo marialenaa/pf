@@ -6,7 +6,7 @@
 /*   By: mgallizz <mgallizz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:49:35 by mgallizz          #+#    #+#             */
-/*   Updated: 2021/03/22 16:29:57 by mgallizz         ###   ########.fr       */
+/*   Updated: 2021/03/23 13:39:09 by mgallizz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void ft_treat_u_i(t_data *data, t_buf *buf)
     if (!data->minus)
         ft_print_width(data->width, buf);
     if (data->neg)
-        ft_putchar('-', &buf->count);      
+         ft_putchar('-', &buf->count);
     ft_print_zero(data->zero_p, buf);
     ft_print_zero(data->zero_w, buf);
     if (!(data->precision && data->zero) && !data->int_min)

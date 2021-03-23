@@ -8,11 +8,11 @@ int main(void)
 
     ptr = &ret;
    //  printf("p\n");
-    ret = printf("%--12.38x%-116.%%--51.178i" ,1756825080u,-1476384935);
+    ret = printf("%0*.u" ,76,450647582u);
     printf("p\n");
      //printf("\n");
-    ret2 = ft_printf("%--12.38x%-116.%%--51.178i" ,1756825080u,-1476384935);
+    ret2 = ft_printf("%0*.u" ,76,450647582u);
     printf("p\n");
-    printf("ret=%d ret-%d\n", ret, ret2);
+    printf("ret=%d ret:%d\n", ret, ret2);
     return (0);
 }

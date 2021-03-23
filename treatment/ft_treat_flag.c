@@ -12,21 +12,6 @@
 
 #include "../libftprintf.h"
 
-void	ft_treat_flag(t_data *data)
-{
-	if (!data->zero)
-	{
-		if ((!data->precision || !data->precision_nb))
-			ft_treat_width(data);
-		else
-			ft_treat_prec(data);
-		if (data->zero_w && data->minus && !data->zero)
-			data->zero_w = 0;
-		if (data->neg && data->width)
-			data->width = data->width -= 1;
-	}
-}
-
 void ft_treat_wildcard(t_data *data, va_list args_ptr)
 {
 	if (data->wildcard_w)
@@ -62,19 +47,18 @@ void ft_wildcard_p(t_data *data, va_list args_ptr)
 	}
 }
 
-void ft_treat_neg(t_data * data)
+void	ft_treat_flag(t_data *data)
 {
-	if (data->zero_w)
+	if (!data->zero)
 	{
-		data->zero_w = data->width - data->len - 1;
-		data->width = 0;
-	}
-	else
-	{
-		if (data->conv == 'p')
-			data->width = data->width - (data->len + 1);
+		if ((!data->precision || !data->precision_nb))
+			ft_treat_width(data);
 		else
-			data->width = data->width - (data->len);
+			ft_treat_prec(data);
+		if (data->zero_w && data->minus && !data->zero)
+			data->zero_w = 0;
+		if (data->neg && data->width)
+			data->width = data->width -= 1;
 	}
 }
 
@@ -99,7 +83,11 @@ void    ft_treat_width(t_data *data)
 		if (data->width < data->len)
 			data->width = 0;
 		else
+		{
 			data->width = data->width - data->len;
+			data->zero_w = 0;
+		}
+			
 	}
 	// else if (data->typ == 'p' && !data->zero && !data->neg)
 	//     data->width = data->width - data->len;
@@ -109,17 +97,21 @@ void    ft_treat_width(t_data *data)
 
 void    ft_treat_prec(t_data *data)
 {
-	//printf("p\n");
 	data->zero_w = 0;
+	// printf("len%d", data->len);
+	// printf("pre%d", data->wildcard_p);
 	if (data->precision_nb > data->len)
 	{
+		
+		// if (data->neg)
+		// 	data->precision -= 1;
 		data->zero_p = data->precision_nb - data->len;
 		if (data->width)
 		{
-			 if (data->precision_nb >= data->width)
-			data->width = 0;
-		else
-			data->width = data->width - data->precision_nb;
+			if (data->precision_nb >= data->width)
+				data->width = 0;
+			else
+				data->width = data->width - data->precision_nb;
 		}
 	}
 	else
@@ -129,3 +121,18 @@ void    ft_treat_prec(t_data *data)
 	}
 }
 
+void ft_treat_neg(t_data * data)
+{
+	if (data->zero_w)
+	{
+		data->zero_w = data->width - data->len - 1;
+		data->width = 0;
+	}
+	else
+	{
+		if (data->conv == 'p')
+			data->width = data->width - (data->len + 1);
+		else
+			data->width = data->width - (data->len);
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: mgallizz <mgallizz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:50:44 by mgallizz          #+#    #+#             */
-/*   Updated: 2021/03/22 16:46:26 by mgallizz         ###   ########.fr       */
+/*   Updated: 2021/03/23 13:28:13 by mgallizz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ void ft_find_mod(char *str, va_list args_ptr, t_buf *buf)
         str = ft_check_mod(str, buf);
         if (*str == '%' && !buf->mod)
         {
-
             data = ft_data_init();
             str++;
             buf->ptr = ft_get_type(str, &data, buf);
             ft_get_flags(str, &data, buf);
+            //printf("tYP%c\n", data.typ);
             if (data.typ)
-                 ft_parser(args_ptr, &data, buf);
+                ft_parser(args_ptr, &data, buf);
             else
-                 ft_notype(args_ptr, &data, buf);
+                ft_notype(&data, buf, args_ptr);
             str = buf->ptr;
         }
         else
@@ -43,9 +43,7 @@ void ft_find_mod(char *str, va_list args_ptr, t_buf *buf)
 
 void *ft_check_mod(char *str, t_buf *buf)
 {
-    if (buf->mod || !(*(str + 1) || *str != '%'))
-         return (str);
-    if (*str == '%')
+    if ((*(str + 1)) && *str == '%')
     {
         //write(1, "**\n", 3);
         if (*(str + 1) == '%')
