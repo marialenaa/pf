@@ -6,11 +6,11 @@
 /*   By: mgallizz <mgallizz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:45:56 by mgallizz          #+#    #+#             */
-/*   Updated: 2021/03/22 10:09:43 by mgallizz         ###   ########.fr       */
+/*   Updated: 2021/03/24 16:11:09 by mgallizz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "../ft_printf.h"
 
 t_buf	ft_init_buf(char *list)
 {

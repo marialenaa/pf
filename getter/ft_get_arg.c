@@ -6,11 +6,11 @@
 /*   By: mgallizz <mgallizz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:47:03 by mgallizz          #+#    #+#             */
-/*   Updated: 2021/03/24 15:57:31 by mgallizz         ###   ########.fr       */
+/*   Updated: 2021/03/24 16:12:27 by mgallizz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "../ft_printf.h"
 
 void	ft_get_arg_s(va_list args_ptr, t_data *data, t_buf *buf)
 {

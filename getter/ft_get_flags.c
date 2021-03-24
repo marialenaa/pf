@@ -6,11 +6,11 @@
 /*   By: mgallizz <mgallizz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:47:34 by mgallizz          #+#    #+#             */
-/*   Updated: 2021/03/24 15:57:57 by mgallizz         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:00:38 by mgallizz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "../ft_printf.h"
 
 void	*ft_get_type(char *str_after_mod, t_data *data, t_buf *buf)
 {
@@ -36,14 +36,7 @@ void	*ft_get_type(char *str_after_mod, t_data *data, t_buf *buf)
 	return (str_after_mod + i);
 }
 
-int		ft_isflag(int c)
-{
-	if (c == '-' || c == '0' || c == '.' || c == '*' || c == '%')
-		return (1);
-	return (0);
-}
-
-void	*ft_check_n_store_digit(char *str_after_mod, int *width_or_prec)
+void	*ft_store_digit(char *str_after_mod, int *width_or_prec)
 {
 	long	res;
 
@@ -71,15 +64,15 @@ void	ft_get_flags(char *str, t_data *data, t_buf *buf)
 			str = ft_strchr(str, '-', &data->minus);
 			str = ft_strchr(str, '0', &data->zero_w);
 			str = ft_strchr(str, '-', &data->minus);
-			str = ft_check_n_store_digit(str, &data->width);
+			str = ft_store_digit(str, &data->width);
 			str = ft_strchr(str, '*', &data->wildcard_w);
 			str = ft_strchr(str, '.', &data->precision);
 			str = ft_strchr(str, '0', &data->zero_p);
 			str = ft_strchr(str, '*', &data->wildcard_p);
 			if (data->precision)
-				str = ft_check_n_store_digit(str, &data->precision_nb);
+				str = ft_store_digit(str, &data->precision_nb);
 			if (data->minus && data->zero_w)
-        		data->zero_w = 0;
+				data->zero_w = 0;
 		}
 		else
 		{
@@ -87,27 +80,9 @@ void	ft_get_flags(char *str, t_data *data, t_buf *buf)
 			str++;
 		}
 	}
-//printf("\nSTRUCTURE INFOS:\n");
-//printf("minus >>>>> %d\n", data->minus);
-//printf("zerow >>>>> %d\n", data->zero_w);
-//printf("wildcardW >>>>> %d\n", data->wildcard_w);
-//printf("width >>>>> %d\n", data->width);
-//printf("precision >>>>> %d\n", data->precision);
-//printf("wildcardP >>>>> %d\n", data->wildcard_p);
-//printf("precision_nb >>>>> %d\n", data->precision_nb);
-//printf("zero >>>>> %d\n", data->zero);
-//printf("zerop >>>>> %d\n", data->zero_p);
-//printf("len >>>>> %d\n", data->len);
-//printf("conv >>>>> %d\n", data->conv);
-   
-// //     //printf("arg_s >>>>> %s\n", data->arg_s);
-// //     printf("hexa >>>>> %llu\n", data->arg.ptr);
-//  //  printf("int >>>>> %d\n", data->arg_i);
- 
-//    printf("mod >>>>> %d\n", data->mod);
 }
 
-void ft_get_wildcard(t_data *data, va_list args_ptr)
+void	ft_get_wildcard(t_data *data, va_list args_ptr)
 {
 	if (data->wildcard_w)
 	{
@@ -127,7 +102,7 @@ void ft_get_wildcard(t_data *data, va_list args_ptr)
 	}
 }
 
-void ft_treat_wildcard(t_data *data)
+void	ft_treat_wildcard(t_data *data)
 {
 	if (data->wildcard_p && data->precision_nb < 0)
 	{
