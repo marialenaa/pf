@@ -6,7 +6,7 @@
 /*   By: mgallizz <mgallizz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:50:44 by mgallizz          #+#    #+#             */
-/*   Updated: 2021/03/24 09:07:30 by mgallizz         ###   ########.fr       */
+/*   Updated: 2021/03/24 15:27:09 by mgallizz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void ft_find_mod(char *str, va_list args_ptr, t_buf *buf)
             if (data.typ)
                 ft_parser(args_ptr, &data, buf);
             else
-                ft_notype(&data, buf, args_ptr);
+                ft_notype_print(&data, buf, args_ptr);
             str = buf->ptr;
         }
         else

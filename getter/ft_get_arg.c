@@ -6,7 +6,7 @@
 /*   By: mgallizz <mgallizz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:47:03 by mgallizz          #+#    #+#             */
-/*   Updated: 2021/03/24 08:39:49 by mgallizz         ###   ########.fr       */
+/*   Updated: 2021/03/24 15:57:31 by mgallizz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_get_arg_s(va_list args_ptr, t_data *data, t_buf *buf)
 	}
 	else
 		data->len = ft_strlen(data->arg_s);
+	ft_treat_wildcard(data);
 	ft_treat_s(data, buf);
 }
 
@@ -38,6 +39,7 @@ void	ft_get_arg_p(va_list args_ptr, t_data *data, t_buf *buf)
 	}
 	if (data->ptr > 0)
 		ft_ptr_len(data->ptr, &data->len);
+	ft_treat_wildcard(data);
 	if (!data->width)
 	{
 		if (data->precision && data->zero_p)
@@ -60,6 +62,7 @@ void	ft_get_arg_i_d(va_list args_ptr, t_data *data, t_buf *buf)
 	}
 	if (data->arg_i == 0)
 		data->zero = 1;
+	ft_treat_wildcard(data);
 	data->len = ft_intlen(data->arg_i, data->conv);
 	ft_treat_u_i(data, buf);
 }
@@ -71,6 +74,7 @@ void	ft_get_arg_x_u(va_list args_ptr, t_data *data, t_buf *buf)
 		data->zero = 1;
 	else
 		data->len = ft_intlen(data->arg_u, data->typ);
+	ft_treat_wildcard(data);
 	if (!(data->typ == 'u'))
 	{
 		data->conv = 'x';
@@ -84,17 +88,16 @@ void	ft_get_arg_x_u(va_list args_ptr, t_data *data, t_buf *buf)
 		{
 			data->zero_p = 0;
 			data->zero_w = 0;
-			data->len = 0;
 		}
 		ft_treat_u_i(data, buf);
 	}
 }
 
-void	ft_notype(t_data *data, t_buf *buf, va_list args_ptr)
+void	ft_notype_print(t_data *data, t_buf *buf, va_list args_ptr)
 {
-	if (data->wildcard_w || data->wildcard_p)
-        ft_treat_wildcard(data, args_ptr);
 	data->len = 1;
+	ft_get_wildcard(data, args_ptr);
+	ft_treat_wildcard(data);
 	if (data->zero_w && data->minus)
 		data->zero_w = 0;
 	ft_treat_width(data);

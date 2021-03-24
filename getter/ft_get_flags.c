@@ -6,7 +6,7 @@
 /*   By: mgallizz <mgallizz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:47:34 by mgallizz          #+#    #+#             */
-/*   Updated: 2021/03/24 09:12:42 by mgallizz         ###   ########.fr       */
+/*   Updated: 2021/03/24 15:57:57 by mgallizz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,7 @@ void	*ft_check_n_store_digit(char *str_after_mod, int *width_or_prec)
 
 void	ft_get_flags(char *str, t_data *data, t_buf *buf)
 {
-	if (!*str)
-		return ;
-	while (*str != data->typ && *str != '%')
+	while (*str && *str != data->typ && *str != '%')
 	{
 		if (ft_isflag(*str) || ft_isdigit(*str))
 		{
@@ -76,12 +74,10 @@ void	ft_get_flags(char *str, t_data *data, t_buf *buf)
 			str = ft_check_n_store_digit(str, &data->width);
 			str = ft_strchr(str, '*', &data->wildcard_w);
 			str = ft_strchr(str, '.', &data->precision);
-			//str = ft_strchr(str, '-', &data->minus);
 			str = ft_strchr(str, '0', &data->zero_p);
 			str = ft_strchr(str, '*', &data->wildcard_p);
 			if (data->precision)
 				str = ft_check_n_store_digit(str, &data->precision_nb);
-				//printf("w%d",data->precision_nb);
 			if (data->minus && data->zero_w)
         		data->zero_w = 0;
 		}
@@ -111,11 +107,11 @@ void	ft_get_flags(char *str, t_data *data, t_buf *buf)
 //    printf("mod >>>>> %d\n", data->mod);
 }
 
-void ft_treat_wildcard(t_data *data, va_list args_ptr)
+void ft_get_wildcard(t_data *data, va_list args_ptr)
 {
 	if (data->wildcard_w)
 	{
-		 data->width = va_arg(args_ptr, int);
+		data->width = va_arg(args_ptr, int);
 		if (data->width < 0)
 		{
 			data->width = data->width * (-1);
@@ -125,15 +121,17 @@ void ft_treat_wildcard(t_data *data, va_list args_ptr)
 	}
 	if (data->wildcard_p)
 	{
-		 data->precision_nb = va_arg(args_ptr, int);
+		data->precision_nb = va_arg(args_ptr, int);
 		if (data->precision_nb == 0)
 			data->wildcard_p = 0;
-		if (data->precision_nb < 0)
-		{
-			if (data->typ != 'i' && data->typ != 'd' && data->typ != 'u')
-				data->precision_nb = 1;
-			if (data->typ == 's') 
-				data->precision = 0;
-		}
+	}
+}
+
+void ft_treat_wildcard(t_data *data)
+{
+	if (data->wildcard_p && data->precision_nb < 0)
+	{
+		data->precision_nb = 0;
+		data->precision = 0;
 	}
 }

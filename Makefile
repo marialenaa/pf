@@ -20,9 +20,9 @@ CFLAGS = -Wall -Wextra -Werror
 
 LIB_MAKE = make -C libft
 
-SRC = 	setup/ft_init.c setup/parser.c getter/ft_get_flags.c getter/ft_get_arg.c treatment/ft_treat_u_i.c \
+SRC = 	setup/ft_init.c setup/parser.c getter/ft_get_flags.c getter/ft_get_arg.c treatment/ft_treat_u_i_x.c \
 		transfo/ft_convert_putnbr_base.c transfo/ft_print.c ft_printf.c treatment/ft_utils.c \
-		treatment/ft_treat_flag.c treatment/ft_treat_c_s.c treatment/ft_treat_x_p.c\
+		treatment/ft_treat_flag.c treatment/ft_treat_c_s.c treatment/ft_treat_p.c\
 
 OBJ = $(SRC:.c=.o)
 
