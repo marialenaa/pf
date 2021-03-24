@@ -8,10 +8,10 @@ int main(void)
 
     ptr = &ret;
    //  printf("p\n");
-    ret = printf("%0*.u" ,76,450647582u);
+    ret = printf("%04.*i", -2, 0);
     printf("p\n");
      //printf("\n");
-    ret2 = ft_printf("%0*.u" ,76,450647582u);
+    ret2 = ft_printf("%04.*i", -2, 0);
     printf("p\n");
     printf("ret=%d ret:%d\n", ret, ret2);
     return (0);

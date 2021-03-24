@@ -6,7 +6,7 @@
 /*   By: mgallizz <mgallizz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:47:03 by mgallizz          #+#    #+#             */
-/*   Updated: 2021/03/23 13:33:31 by mgallizz         ###   ########.fr       */
+/*   Updated: 2021/03/24 08:39:49 by mgallizz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,8 @@ void	ft_get_arg_i_d(va_list args_ptr, t_data *data, t_buf *buf)
 {
 	data->conv = 'i';
 	data->arg_i = va_arg(args_ptr, int);
-	//printf("Q=%i\n", data->arg_i);
 	if (data->arg_i < 0)
 	{
-		//printf("Z\n");
 		data->neg = 1;
 		if (data->arg_i == -2147483648)
 			data->int_min = 1;

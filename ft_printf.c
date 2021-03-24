@@ -6,7 +6,7 @@
 /*   By: mgallizz <mgallizz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:50:44 by mgallizz          #+#    #+#             */
-/*   Updated: 2021/03/23 13:28:13 by mgallizz         ###   ########.fr       */
+/*   Updated: 2021/03/24 09:07:30 by mgallizz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void ft_find_mod(char *str, va_list args_ptr, t_buf *buf)
             str++;
             buf->ptr = ft_get_type(str, &data, buf);
             ft_get_flags(str, &data, buf);
-            //printf("tYP%c\n", data.typ);
             if (data.typ)
                 ft_parser(args_ptr, &data, buf);
             else
@@ -45,7 +44,6 @@ void *ft_check_mod(char *str, t_buf *buf)
 {
     if ((*(str + 1)) && *str == '%')
     {
-        //write(1, "**\n", 3);
         if (*(str + 1) == '%')
         {
             buf->mod = 1;

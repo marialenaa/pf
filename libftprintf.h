@@ -6,7 +6,7 @@
 /*   By: mgallizz <mgallizz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:51:08 by mgallizz          #+#    #+#             */
-/*   Updated: 2021/03/23 13:27:59 by mgallizz         ###   ########.fr       */
+/*   Updated: 2021/03/24 09:13:10 by mgallizz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ void        ft_treat_arg_zero(t_data *data);
 void    ft_treat_zero_p(t_data *data, t_buf *buf);
 void    ft_width_notprec_nb(t_data *data);
 void        ft_treat_flag(t_data *data);
-void ft_wildcard_p(t_data *data, va_list args_ptr);
-void ft_wildcard_w(t_data *data, va_list args_ptr);
 
 //treat types
 void        ft_treat_u_i(t_data *data, t_buf *buf);

@@ -6,7 +6,7 @@
 /*   By: mgallizz <mgallizz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:47:34 by mgallizz          #+#    #+#             */
-/*   Updated: 2021/03/23 13:36:59 by mgallizz         ###   ########.fr       */
+/*   Updated: 2021/03/24 09:12:42 by mgallizz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,31 @@ void	ft_get_flags(char *str, t_data *data, t_buf *buf)
 //  //  printf("int >>>>> %d\n", data->arg_i);
  
 //    printf("mod >>>>> %d\n", data->mod);
+}
+
+void ft_treat_wildcard(t_data *data, va_list args_ptr)
+{
+	if (data->wildcard_w)
+	{
+		 data->width = va_arg(args_ptr, int);
+		if (data->width < 0)
+		{
+			data->width = data->width * (-1);
+			data->zero_w = 0;
+			data->minus = 1;
+		}
+	}
+	if (data->wildcard_p)
+	{
+		 data->precision_nb = va_arg(args_ptr, int);
+		if (data->precision_nb == 0)
+			data->wildcard_p = 0;
+		if (data->precision_nb < 0)
+		{
+			if (data->typ != 'i' && data->typ != 'd' && data->typ != 'u')
+				data->precision_nb = 1;
+			if (data->typ == 's') 
+				data->precision = 0;
+		}
+	}
 }
